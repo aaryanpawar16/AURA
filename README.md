@@ -6,7 +6,8 @@ Aura is a premium, full-stack marketplace application designed for high-ticket i
 
 <img width="1889" height="897" alt="image" src="https://github.com/user-attachments/assets/a6651be3-7d90-4f03-95d5-4d51e5db3858" />
 
-<img width="1889" height="897" alt="image" src="https://github.com/user-attachments/assets/a6fde3b3-a761-425a-b2e7-9b8a0461c1c0" />
+<img width="1919" height="834" alt="image" src="https://github.com/user-attachments/assets/5d5cf533-8223-4a0d-beec-87bff561be37" />
+
 
 🚀 Key Features
 
@@ -149,3 +150,4 @@ Aura includes a simulated Return & Refund workflow. Check the Tracking tab to se
 
 
 © 2026 Aura Marketplace. All rights reserved.
+

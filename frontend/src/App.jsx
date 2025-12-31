@@ -9,68 +9,9 @@ import {
 // --- UTILS ---
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
-// --- FALLBACK DATA ---
+// --- FALLBACK DATA (If backend is offline) ---
 const FALLBACK_CATEGORIES = ["All", "Jordan", "Nike", "Adidas", "New Balance", "Accessories"];
 const FALLBACK_PRODUCTS = []; 
-
-// --- CARD SPOTLIGHT COMPONENTS ---
-
-const DotPattern = () => {
-  return (
-    <div className="absolute inset-0 h-full w-full pointer-events-none [mask-image:radial-gradient(transparent,white)]">
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-    </div>
-  );
-};
-
-const CardSpotlight = ({
-  children,
-  radius = 350,
-  color = "#262626",
-  className,
-  ...props
-}) => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }) {
-    let { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  return (
-    <div
-      className={cn(
-        "group/spotlight relative border border-neutral-800 bg-black dark:border-neutral-800",
-        className
-      )}
-      onMouseMove={handleMouseMove}
-      {...props}
-    >
-      <motion.div
-        className="pointer-events-none absolute z-0 -inset-px rounded-md opacity-0 transition duration-300 group-hover/spotlight:opacity-100"
-        style={{
-          backgroundColor: color,
-          maskImage: useMotionTemplate`
-            radial-gradient(
-              ${radius}px circle at ${mouseX}px ${mouseY}px,
-              white,
-              transparent 80%
-            )
-          `,
-        }}
-      >
-        {/* Simplified Reveal Effect: Dot Pattern instead of heavy Three.js Canvas */}
-        <div className="h-full w-full bg-transparent absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-indigo-600/20" />
-            <DotPattern />
-        </div>
-      </motion.div>
-      {children}
-    </div>
-  );
-};
 
 // --- TOAST COMPONENT ---
 const Toast = ({ message, onClose }) => {
@@ -147,6 +88,63 @@ const CertificateModal = ({ order, onClose }) => {
             </motion.div>
         </div>
     );
+};
+
+// --- CARD SPOTLIGHT COMPONENT ---
+const DotPattern = () => {
+  return (
+    <div className="absolute inset-0 h-full w-full pointer-events-none [mask-image:radial-gradient(transparent,white)]">
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+    </div>
+  );
+};
+
+const CardSpotlight = ({
+  children,
+  radius = 350,
+  color = "#262626",
+  className,
+  ...props
+}) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }) {
+    let { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <div
+      className={cn(
+        "group/spotlight relative border border-neutral-800 bg-black dark:border-neutral-800",
+        className
+      )}
+      onMouseMove={handleMouseMove}
+      {...props}
+    >
+      <motion.div
+        className="pointer-events-none absolute z-0 -inset-px rounded-md opacity-0 transition duration-300 group-hover/spotlight:opacity-100"
+        style={{
+          backgroundColor: color,
+          maskImage: useMotionTemplate`
+            radial-gradient(
+              ${radius}px circle at ${mouseX}px ${mouseY}px,
+              white,
+              transparent 80%
+            )
+          `,
+        }}
+      >
+        <div className="h-full w-full bg-transparent absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-indigo-600/20" />
+            <DotPattern />
+        </div>
+      </motion.div>
+      {children}
+    </div>
+  );
 };
 
 // --- WAVY BACKGROUND COMPONENT ---
@@ -697,15 +695,20 @@ export default function App() {
 
   // Fetch all data
   useEffect(() => {
+    // Determine the base URL: Use current location origin if deployed (Vercel), else localhost
+    const baseUrl = window.location.hostname === 'localhost' 
+      ? 'http://localhost:5000' 
+      : window.location.origin;
+
     const fetchData = async () => {
       try {
         console.log("Connecting to Aura Backend...");
         const [prodRes, catRes, qualRes, ordRes, revRes] = await Promise.all([
-          fetch('http://localhost:5000/api/products'),
-          fetch('http://localhost:5000/api/categories'),
-          fetch('http://localhost:5000/api/quality'),
-          fetch('http://localhost:5000/api/orders'),
-          fetch('http://localhost:5000/api/reviews')
+          fetch(`${baseUrl}/api/products`),
+          fetch(`${baseUrl}/api/categories`),
+          fetch(`${baseUrl}/api/quality`),
+          fetch(`${baseUrl}/api/orders`),
+          fetch(`${baseUrl}/api/reviews`)
         ]);
 
         if (!prodRes.ok) throw new Error("Backend unreachable");

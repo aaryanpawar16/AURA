@@ -2,6 +2,12 @@ Aura Marketplace
 
 Aura is a premium, full-stack marketplace application designed for high-ticket items like limited-edition sneakers, electronics, and collectibles. It distinguishes itself with a focus on trust, transparency (10-point quality checks), and a high-end, immersive user interface.
 
+<img width="1895" height="788" alt="image" src="https://github.com/user-attachments/assets/c89f4f27-fa0a-4097-a2fb-d6f451d5ccf2" />
+
+<img width="1889" height="897" alt="image" src="https://github.com/user-attachments/assets/a6651be3-7d90-4f03-95d5-4d51e5db3858" />
+
+<img width="1889" height="897" alt="image" src="https://github.com/user-attachments/assets/a6fde3b3-a761-425a-b2e7-9b8a0461c1c0" />
+
 🚀 Key Features
 
 ** immersive UI**: Features a custom "Wavy Background" and "Card Spotlight" effects powered by Framer Motion.
@@ -140,5 +146,6 @@ The product cards utilize a custom useMotionTemplate effect to track mouse movem
 🛡️ Trust & Safety
 
 Aura includes a simulated Return & Refund workflow. Check the Tracking tab to see an example order (ORD-9921-RF) that failed the quality check and automatically processed a refund.
+
 
 © 2026 Aura Marketplace. All rights reserved.

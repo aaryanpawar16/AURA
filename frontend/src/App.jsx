@@ -258,7 +258,7 @@ const WavyBackground = ({ children, className, containerClassName, colors, waveW
 
 // --- NAVIGATION ---
 const Navbar = ({ view, setView, cartCount, searchQuery, setSearchQuery }) => {
-  const navItems = [{ id: 'home', label: 'Catalog', icon: <ShoppingBag size={14}/> }, { id: 'tracking', label: 'Tracking', icon: <Truck size={14} /> }];
+  const navItems = [{ id: 'home', label: 'Catalog', icon: <ShoppingBag size={14}/> }];
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div className="flex items-center gap-12 w-full md:w-auto justify-between">

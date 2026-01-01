@@ -10,10 +10,10 @@ import {
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
 // --- CONFIGURATION ---
-// Pointing to your live Render Backend
+// ⚠️ HARDCODED to Render Backend to fix localhost connection error
 const API_BASE_URL = 'https://aura-1ckq.onrender.com'; 
 
-// --- FALLBACK DATA (If backend is offline) ---
+// --- FALLBACK DATA (If backend is offline/sleeping) ---
 const FALLBACK_CATEGORIES = ["All", "Jordan", "Nike", "Adidas", "New Balance", "Accessories"];
 const FALLBACK_PRODUCTS = []; 
 
@@ -699,18 +699,15 @@ export default function App() {
 
   // Fetch all data
   useEffect(() => {
-    // Determine the base URL: Use current location origin if deployed (Vercel), else localhost
-    const baseUrl = API_BASE_URL;
-
     const fetchData = async () => {
       try {
-        console.log("Connecting to Aura Backend...");
+        console.log(`Connecting to Aura Backend at ${API_BASE_URL}...`);
         const [prodRes, catRes, qualRes, ordRes, revRes] = await Promise.all([
-          fetch(`${baseUrl}/api/products`),
-          fetch(`${baseUrl}/api/categories`),
-          fetch(`${baseUrl}/api/quality`),
-          fetch(`${baseUrl}/api/orders`),
-          fetch(`${baseUrl}/api/reviews`)
+          fetch(`${API_BASE_URL}/api/products`),
+          fetch(`${API_BASE_URL}/api/categories`),
+          fetch(`${API_BASE_URL}/api/quality`),
+          fetch(`${API_BASE_URL}/api/orders`),
+          fetch(`${API_BASE_URL}/api/reviews`)
         ]);
 
         if (!prodRes.ok) throw new Error("Backend unreachable");

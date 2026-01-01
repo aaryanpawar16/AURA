@@ -9,6 +9,11 @@ import {
 // --- UTILS ---
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
+// --- CONFIGURATION ---
+// FOR VERCEL DEPLOYMENT: Uncomment the line below and comment out the hardcoded localhost line
+// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:5000'; 
+
 // --- FALLBACK DATA (If backend is offline) ---
 const FALLBACK_CATEGORIES = ["All", "Jordan", "Nike", "Adidas", "New Balance", "Accessories"];
 const FALLBACK_PRODUCTS = []; 
@@ -258,7 +263,7 @@ const WavyBackground = ({ children, className, containerClassName, colors, waveW
 
 // --- NAVIGATION ---
 const Navbar = ({ view, setView, cartCount, searchQuery, setSearchQuery }) => {
-  const navItems = [{ id: 'home', label: 'Catalog', icon: <ShoppingBag size={14}/> }];
+  const navItems = [{ id: 'home', label: 'Catalog', icon: <ShoppingBag size={14}/> }, { id: 'tracking', label: 'Tracking', icon: <Truck size={14} /> }];
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div className="flex items-center gap-12 w-full md:w-auto justify-between">
@@ -696,9 +701,7 @@ export default function App() {
   // Fetch all data
   useEffect(() => {
     // Determine the base URL: Use current location origin if deployed (Vercel), else localhost
-    const baseUrl = window.location.hostname === 'localhost' 
-      ? 'http://localhost:5000' 
-      : window.location.origin;
+    const baseUrl = API_BASE_URL;
 
     const fetchData = async () => {
       try {

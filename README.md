@@ -1,6 +1,7 @@
 Aura Marketplace
 
 Aura is a premium, full-stack marketplace application designed for high-ticket items like limited-edition sneakers, electronics, and collectibles. It distinguishes itself with a focus on trust, transparency (10-point quality checks), and a high-end, immersive user interface.
+Video Demo: https://www.youtube.com/watch?v=8pqwEUdNuVY
 
 <img width="1895" height="788" alt="image" src="https://github.com/user-attachments/assets/c89f4f27-fa0a-4097-a2fb-d6f451d5ccf2" />
 
@@ -150,4 +151,5 @@ Aura includes a simulated Return & Refund workflow. Check the Tracking tab to se
 
 
 © 2026 Aura Marketplace. All rights reserved.
+
 

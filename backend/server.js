@@ -12,6 +12,11 @@ app.use(express.json()); // Parse JSON bodies
 // Routes
 app.use('/api', apiRoutes);
 
+// --- NEW: Add a root route to prevent "Cannot GET /" ---
+app.get('/', (req, res) => {
+  res.send('🚀 Aura Backend is Running! Access API at /api/products');
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

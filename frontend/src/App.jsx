@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, forwardRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { 
   ShieldCheck, Search, ShoppingBag, 
@@ -10,9 +10,8 @@ import {
 const cn = (...classes) => classes.filter(Boolean).join(' ');
 
 // --- CONFIGURATION ---
-// FOR VERCEL DEPLOYMENT: Uncomment the line below and comment out the hardcoded localhost line
-// const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-const API_BASE_URL = 'http://localhost:5000'; 
+// Pointing to your live Render Backend
+const API_BASE_URL = 'https://aura-1ckq.onrender.com'; 
 
 // --- FALLBACK DATA (If backend is offline) ---
 const FALLBACK_CATEGORIES = ["All", "Jordan", "Nike", "Adidas", "New Balance", "Accessories"];
